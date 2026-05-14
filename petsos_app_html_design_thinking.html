@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PetSOS Neo</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:'Outfit',sans-serif;
+}
+
+body{
+background:#09090f;
+color:white;
+overflow-x:hidden;
+}
+
+body::before{
+content:'';
+position:fixed;
+width:800px;
+height:800px;
+background:#6d28d9;
+filter:blur(220px);
+top:-350px;
+left:-250px;
+opacity:.35;
+z-index:-1;
+}
+
+body::after{
+content:'';
+position:fixed;
+width:700px;
+height:700px;
+background:#f97316;
+filter:blur(220px);
+bottom:-300px;
+right:-200px;
+opacity:.25;
+z-index:-1;
+}
+
+nav{
+position:fixed;
+top:0;
+width:100%;
+z-index:999;
+background:rgba(9,9,15,.65);
+backdrop-filter:blur(16px);
+border-bottom:1px solid rgba(255,255,255,.06);
+}
+
+.navbar{
+width:90%;
+max-width:1400px;
+margin:auto;
+display:flex;
+align-items:center;
+justify-content:space-between;
+padding:22px 0;
+}
+
+.logo{
+font-size:2rem;
+font-weight:800;
+background:linear-gradient(to right,#c084fc,#fb923c);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+nav ul{
+display:flex;
+gap:35px;
+list-style:none;
+}
+
+nav a{
+text-decoration:none;
+color:#e9d5ff;
+font-weight:500;
+transition:.3s;
+}
+
+nav a:hover{
+color:#fb923c;
+}
+
+.hero{
+min-height:100vh;
+display:grid;
+grid-template-columns:1fr 1fr;
+align-items:center;
+padding:120px 8%;
+gap:70px;
+}
+
+.small-tag{
+display:inline-block;
+padding:12px 22px;
+border-radius:50px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
+margin-bottom:30px;
+color:#ddd6fe;
+}
+
+.hero h1{
+font-size:6.5rem;
+line-height:.95;
+margin-bottom:25px;
+font-weight:800;
+}
+
+.hero h1 span{
+background:linear-gradient(to right,#a855f7,#fb923c);
+-webkit-background-clip:text;
+-webkit-text-fill-color:transparent;
+}
+
+.hero p{
+font-size:1.15rem;
+line-height:2;
+color:#d4d4d8;
+margin-bottom:35px;
+max-width:620px;
+}
+
+.buttons{
+display:flex;
+gap:18px;
+flex-wrap:wrap;
+}
+
+.btn{
+padding:18px 30px;
+border-radius:20px;
+text-decoration:none;
+font-weight:600;
+transition:.35s;
+}
+
+.primary{
+background:linear-gradient(135deg,#7c3aed,#f97316);
+color:white;
+box-shadow:0 20px 40px rgba(124,58,237,.4);
+}
+
+.secondary{
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+color:white;
+backdrop-filter:blur(12px);
+}
+
+.btn:hover{
+transform:translateY(-6px);
+}
+
+.visual{
+position:relative;
+height:750px;
+}
+
+.main-card{
+position:absolute;
+right:0;
+width:420px;
+height:720px;
+border-radius:45px;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(18px);
+padding:28px;
+box-shadow:0 30px 60px rgba(0,0,0,.4);
+overflow:hidden;
+}
+
+.main-card::before{
+content:'';
+position:absolute;
+width:170px;
+height:38px;
+background:black;
+top:0;
+left:50%;
+transform:translateX(-50%);
+border-radius:0 0 25px 25px;
+}
+
+.mini-card{
+position:absolute;
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
+backdrop-filter:blur(18px);
+border-radius:30px;
+padding:25px;
+box-shadow:0 25px 45px rgba(0,0,0,.25);
+}
+
+.card1{
+width:260px;
+left:0;
+top:90px;
+}
+
+.card2{
+width:280px;
+left:40px;
+bottom:120px;
+}
+
+.screen-top{
+margin-top:45px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:30px;
+}
+
+.screen-alert{
+background:linear-gradient(135deg,#7c3aed,#f97316);
+padding:25px;
+border-radius:30px;
+margin-bottom:20px;
+}
+
+.screen-alert h3{
+margin-bottom:10px;
+}
+
+.pet-box{
+background:rgba(255,255,255,.05);
+padding:18px;
+border-radius:22px;
+margin-bottom:14px;
+border:1px solid rgba(255,255,255,.08);
+}
+
+.pet-box h4{
+margin-bottom:5px;
+}
+
+section{
+padding:120px 8%;
+}
+
+.title{
+text-align:center;
+margin-bottom:70px;
+}
+
+.title h2{
+font-size:4rem;
+margin-bottom:12px;
+}
+
+.title p{
+color:#d8b4fe;
+}
+
+.cards{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+gap:30px;
+}
+
+.feature{
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+padding:40px;
+border-radius:35px;
+transition:.35s;
+position:relative;
+overflow:hidden;
+}
+
+.feature::before{
+content:'';
+position:absolute;
+width:200px;
+height:200px;
+border-radius:50%;
+background:rgba(255,255,255,.04);
+right:-90px;
+top:-90px;
+}
+
+.feature:hover{
+transform:translateY(-12px);
+box-shadow:0 25px 50px rgba(0,0,0,.3);
+}
+
+.feature span{
+font-size:3rem;
+display:block;
+margin-bottom:20px;
+}
+
+.feature h3{
+font-size:1.6rem;
+margin-bottom:14px;
+}
+
+.feature p{
+line-height:1.9;
+color:#d4d4d8;
+}
+
+.mockup{
+max-width:1200px;
+margin:auto;
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:40px;
+align-items:center;
+background:rgba(255,255,255,.05);
+border:1px solid rgba(255,255,255,.08);
+padding:55px;
+border-radius:40px;
+}
+
+.mockup-left{
+background:linear-gradient(135deg,#7c3aed,#f97316);
+padding:45px;
+border-radius:35px;
+height:100%;
+display:flex;
+flex-direction:column;
+justify-content:center;
+box-shadow:0 20px 40px rgba(124,58,237,.35);
+}
+
+.mockup-left h3{
+font-size:2.6rem;
+margin-bottom:20px;
+}
+
+.mockup-left p{
+line-height:2;
+}
+
+form{
+display:flex;
+flex-direction:column;
+gap:20px;
+}
+
+input,
+textarea{
+background:rgba(255,255,255,.06);
+border:1px solid rgba(255,255,255,.08);
+padding:20px;
+border-radius:18px;
+color:white;
+font-size:1rem;
+outline:none;
+}
+
+textarea{
+height:140px;
+resize:none;
+}
+
+input::placeholder,
+textarea::placeholder{
+color:#d4d4d8;
+}
+
+button{
+background:linear-gradient(135deg,#7c3aed,#f97316);
+padding:20px;
+border:none;
+border-radius:18px;
+color:white;
+font-size:1rem;
+font-weight:700;
+cursor:pointer;
+transition:.3s;
+box-shadow:0 18px 35px rgba(124,58,237,.35);
+}
+
+button:hover{
+transform:translateY(-5px);
+}
+
+footer{
+padding:45px;
+text-align:center;
+color:#d4d4d8;
+border-top:1px solid rgba(255,255,255,.06);
+background:rgba(255,255,255,.03);
+}
+
+.whatsapp{
+position:fixed;
+right:30px;
+bottom:30px;
+width:85px;
+height:85px;
+border-radius:50%;
+background:linear-gradient(135deg,#7c3aed,#f97316);
+display:flex;
+align-items:center;
+justify-content:center;
+text-decoration:none;
+font-size:2rem;
+color:white;
+box-shadow:0 20px 40px rgba(124,58,237,.45);
+z-index:999;
+animation:pulse 3s infinite;
+}
+
+@keyframes pulse{
+0%{transform:scale(1)}
+50%{transform:scale(1.08)}
+100%{transform:scale(1)}
+}
+
+@media(max-width:1100px){
+.hero,
+.mockup{
+grid-template-columns:1fr;
+}
+
+.visual{
+height:auto;
+}
+
+.main-card{
+position:relative;
+margin:auto;
+}
+
+.mini-card{
+display:none;
+}
+
+.hero h1{
+font-size:4rem;
+}
+}
+
+@media(max-width:700px){
+nav ul{
+display:none;
+}
+
+.hero h1{
+font-size:3rem;
+}
+
+.title h2{
+font-size:2.5rem;
+}
+
+.main-card{
+width:100%;
+height:auto;
+}
+
+.mockup{
+padding:25px;
+}
+}
+
+</style>
+</head>
+<body>
+
+<nav>
+<div class="navbar">
+<div class="logo">🐾 PetSOS</div>
+
+<ul>
+<li><a href="#inicio">Início</a></li>
+<li><a href="#funcoes">Funções</a></li>
+<li><a href="#mockup">Mockup</a></li>
+<li><a href="#contato">Contato</a></li>
+</ul>
+</div>
+</nav>
+
+<section class="hero" id="inicio">
+
+<div>
+<div class="small-tag">
+✨ Plataforma inteligente para pets perdidos
+</div>
+
+<h1>
+Encontre <span>quem você ama</span> mais rápido.
+</h1>
+
+<p>
+O PetSOS foi criado através do Design Thinking para revolucionar a busca por animais desaparecidos usando comunidade, localização em tempo real e alertas inteligentes.
+</p>
+
+<div class="buttons">
+<a href="#mockup" class="btn primary">Ver Projeto</a>
+<a href="#funcoes" class="btn secondary">Explorar App</a>
+</div>
+</div>
+
+<div class="visual">
+
+<div class="mini-card card1">
+<h3>📍 Mapa Inteligente</h3>
+<br>
+<p>Pets próximos da sua região aparecem automaticamente.</p>
+</div>
+
+<div class="main-card">
+
+<div class="screen-top">
+<h3>PetSOS</h3>
+<span>🔔</span>
+</div>
+
+<div class="screen-alert">
+<h3>⚠️ Alerta Urgente</h3>
+<p>Golden Retriever desaparecido próximo à Avenida Paulista.</p>
+</div>
+
+<div class="pet-box">
+<h4>🐶 Thor</h4>
+<p>Último local: Vila Mariana</p>
+</div>
+
+<div class="pet-box">
+<h4>🐱 Luna</h4>
+<p>Último local: Liberdade</p>
+</div>
+
+<div class="pet-box">
+<h4>🐶 Max</h4>
+<p>Último local: Moema</p>
+</div>
+
+<div class="pet-box">
+<h4>🐱 Mel</h4>
+<p>Último local: Tatuapé</p>
+</div>
+
+</div>
+
+<div class="mini-card card2">
+<h3>📊 Comunidade</h3>
+<br>
+<p>Mais de 3 mil pets encontrados com ajuda da comunidade.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="funcoes">
+
+<div class="title">
+<h2>Funcionalidades</h2>
+<p>Um app moderno inspirado em startups premium</p>
+</div>
+
+<div class="cards">
+
+<div class="feature">
+<span>🚨</span>
+<h3>Alertas Instantâneos</h3>
+<p>Notificações inteligentes enviadas automaticamente para pessoas próximas.</p>
+</div>
+
+<div class="feature">
+<span>📲</span>
+<h3>Compartilhamento Social</h3>
+<p>Compartilhe no WhatsApp, Instagram e Facebook com apenas um clique.</p>
+</div>
+
+<div class="feature">
+<span>🗺️</span>
+<h3>Mapa em Tempo Real</h3>
+<p>Visualização dinâmica dos pets encontrados e desaparecidos.</p>
+</div>
+
+<div class="feature">
+<span>💬</span>
+<h3>Chat Integrado</h3>
+<p>Converse diretamente com pessoas que encontraram pistas.</p>
+</div>
+
+<div class="feature">
+<span>🐾</span>
+<h3>Perfil do Pet</h3>
+<p>Cada animal possui uma página personalizada com QR Code.</p>
+</div>
+
+<div class="feature">
+<span>🧠</span>
+<h3>Comunidade Inteligente</h3>
+<p>Pessoas colaboram juntas para aumentar as chances de reencontro.</p>
+</div>
+
+</div>
+
+</section>
+
+<section id="mockup">
+
+<div class="title">
+<h2>Protótipo do Aplicativo</h2>
+<p>Interface futurista e intuitiva</p>
+</div>
+
+<div class="mockup">
+
+<div class="mockup-left">
+<h3>🐶 Publicar Pet Perdido</h3>
+
+<p>
+O usuário consegue criar um alerta em poucos segundos utilizando uma interface simples, rápida e moderna.
+</p>
+</div>
+
+<form>
+<input type="text" placeholder="Nome do pet">
+<input type="text" placeholder="Raça do pet">
+<input type="text" placeholder="Última localização">
+<input type="text" placeholder="Telefone para contato">
+<textarea placeholder="Descreva o pet..."></textarea>
+<button>🚀 Publicar Alerta</button>
+</form>
+
+</div>
+
+</section>
+
+<footer id="contato">
+🐾 PetSOS • Landing Page futurista em HTML + CSS
+</footer>
+
+<a href="https://wa.me/5511999999999" target="_blank" class="whatsapp">
+💬
+</a>
+
+</body>
+</html>
